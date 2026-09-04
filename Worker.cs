@@ -63,7 +63,11 @@ public sealed class Worker : BackgroundService
 
             if (_options.DryRun)
             {
-                _logger.LogInformation("DRY RUN: would publish {Count} posts for Reddit {Id}:\n{Thread}", tweets.Count, string.Join("\n---\n", tweets));
+                _logger.LogInformation(
+                    "DRY RUN: would publish {Count} posts for Reddit {Id}:\n{Thread}",
+                    tweets.Count,
+                    post.Id,
+                    string.Join("\n---\n", tweets)); 
                 await _state.MarkProcessedAsync(post.Id);
                 continue;
             }
