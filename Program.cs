@@ -9,6 +9,7 @@ builder.Services.AddSingleton(builder.Configuration.GetSection("Reddit").Get<Red
 builder.Services.AddSingleton(builder.Configuration.GetSection("X").Get<XOptions>() ?? new());
 builder.Services.AddSingleton(builder.Configuration.GetSection("OpenAI").Get<OpenAiOptions>() ?? new());
 
+builder.Services.AddHttpClient();
 builder.Services.AddSingleton<RedditClient>();
 builder.Services.AddSingleton<XClient>();
 builder.Services.AddSingleton<AiThreadWriter>();
