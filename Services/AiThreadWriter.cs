@@ -27,7 +27,7 @@ Rules:
 - Preserve the original meaning and factual claims. Do not invent facts.
 - Keep the original language of the post.
 - Make the thread readable and natural, not a mechanical word split.
-- Return ONLY valid JSON: {\"tweets\":[\"...\",\"...\"]}
+- Return ONLY valid JSON: {"tweets":["...","..."]}
 - Each tweet must be <= 220 characters before numbering.
 - The first tweet should hook the reader and include the post title when useful.
 - Do not add hashtags unless they already appear in the source.
