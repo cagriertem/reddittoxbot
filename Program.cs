@@ -5,6 +5,7 @@ using RedditToXBot.Services;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.Configure<BotOptions>(builder.Configuration.GetSection("Bot"));
+builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<BotOptions>>().Value);
 builder.Services.AddSingleton(builder.Configuration.GetSection("Reddit").Get<RedditOptions>() ?? new());
 builder.Services.AddSingleton(builder.Configuration.GetSection("X").Get<XOptions>() ?? new());
 builder.Services.AddSingleton(builder.Configuration.GetSection("OpenAI").Get<OpenAiOptions>() ?? new());
