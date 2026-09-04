@@ -1,0 +1,54 @@
+name: Reddit to X Bot
+
+on:
+  schedule:
+    # GitHub schedules are approximate; this means roughly every 5 minutes.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reddit-to-x-bot
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Run bot once
+        env:
+          Reddit__Username: ${{ secrets.REDDIT_USERNAME }}
+          OpenAI__ApiKey: ${{ secrets.OPENAI_API_KEY }}
+          X__UserAccessToken: ${{ secrets.X_USER_ACCESS_TOKEN }}
+          Bot__RunOnce: "true"
+          # Keep this true while testing. Change to false when you are ready to publish.
+          Bot__DryRun: "true"
+        run: dotnet run --configuration Release --no-restore
+
+      - name: Persist processed Reddit IDs
+        run: |
+          if [ -n "$(git status --porcelain -- data/processed.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/processed.json
+            git commit -m "chore: update Reddit bot state"
+            git push
+          else
+            echo "No state changes to commit."
+          fi
