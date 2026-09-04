@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RedditToXBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d38c6fcaddfbd4481b762345d55ce8f0419cb6b3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+357d13eb851756f900fde54da6f2a85c1af35a4f")]
 [assembly: System.Reflection.AssemblyProductAttribute("RedditToXBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RedditToXBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
